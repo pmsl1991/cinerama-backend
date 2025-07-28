@@ -67,6 +67,10 @@ app.post('/api/login/verify-code', (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('Cinerama Backend funcionando');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor backend Cinerama corriendo en puerto ${PORT}`);
