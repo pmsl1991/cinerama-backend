@@ -5,14 +5,22 @@ require('dotenv').config();
 
 const app = express();
 const corsOptions = {
-  origin: [
-    "http://127.0.0.1:5506",
-    "http://localhost:5506",
-    "https://cinerama-frontend.onrender.com"
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5506",
+      "http://127.0.0.1:5506",
+      "https://cinerama-frontend.onrender.com"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"]
+  credentials: true, // <--- muy importante si usas cookies o autenticación
 };
+
 
 
 app.use(cors(corsOptions));
