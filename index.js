@@ -4,7 +4,14 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "*", // O reemplaza "*" por tu dominio exacto si luego lo subes
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 let verificationCode = '';
