@@ -5,10 +5,15 @@ require('dotenv').config();
 
 const app = express();
 const corsOptions = {
-  origin: "*", // O reemplaza "*" por tu dominio exacto si luego lo subes
+  origin: [
+    "http://127.0.0.1:5506",
+    "http://localhost:5506",
+    "https://cinerama-frontend.onrender.com"
+  ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 };
+
 
 app.use(cors(corsOptions));
 
