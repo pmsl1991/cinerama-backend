@@ -7,10 +7,23 @@ const app = express();
 
 // ✅ CONFIGURACIÓN CORRECTA DE CORS (solo 1 vez)
 app.use(cors({
-  origin: "https://cinerama-frontend.onrender.com",
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5506",
+      "http://127.0.0.1:5506",
+      "https://cinerama-frontend.onrender.com"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST"],
+  credentials: true,
   allowedHeaders: ["Content-Type"]
 }));
+
 
 app.use(express.json());
 
